@@ -2,10 +2,12 @@
 
 When loading, editing and saving a Qt UI file with Qt Designer, Qt designer will not respect the order of xml items. Instead the order will change seemingly at random.
 
-This behavior is unfriendly to version control. 
+This behavior is unfriendly to version control.
 
 Currently the tool supports:
 - Sort the children of QGridLayout by row-column order
+- Remove stdset="0" attributes
+- Remove native="true" attributes
 
 Problem is discussed further here:
 
@@ -19,7 +21,7 @@ git clone git@github.com:davidosterberg/Qt-UI-file-sorter.git
 
 Usage:
 ```sh
-sort_ui [-h] [-o outfile] filename
+sort_ui [-h] [-o outfile] [--no-sort-qgridlayout] [--no-remove-stdset] [--no-remove-native] filename
 ```
 
 Example:
@@ -27,4 +29,5 @@ Example:
 sort_ui examples/TaskHoleParameters.ui
 ```
 will sort the supplied unsorted ui file overwriting the original.
+
 
