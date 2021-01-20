@@ -90,12 +90,12 @@ parser.add_argument('--no-sort-qgridlayout',
 parser.add_argument('--no-remove-stdset',
                     action='store_false',
                     dest='remove_stdset',
-                    help='Remove any stdset="0" attribute (default: true)')
+                    help='Do not remove any stdset="0" attribute (default: false)')
 
 parser.add_argument('--no-remove-native',
                     action='store_false',
                     dest='remove_native',
-                    help='Remove any native="true" attribute (default: true)')
+                    help='Do not remove any native="true" attribute (default: false)')
 
 parser.set_defaults(sort_qgridlayout=True, remove_stdset=True, remove_native=True)
 
