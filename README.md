@@ -10,3 +10,21 @@ Currently the tool supports:
 Problem is discussed further here:
 
 https://stackoverflow.com/questions/65463217/qt-ui-file-xml-order-qgridlayout-row-order-leads-to-large-commit-differences/65778726?noredirect=1#comment116324573_65778726
+
+
+Installation:
+```sh
+git clone git@github.com:davidosterberg/Qt-UI-file-sorter.git
+```
+
+Usage:
+```sh
+sort_ui [-h] [-o outfile] filename
+```
+
+Example:
+```sh
+sort_ui examples/TaskHoleParameters.ui
+```
+will sort the supplied unsorted ui file overwriting the original.
+
