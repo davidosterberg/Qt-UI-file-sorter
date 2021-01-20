@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
+from __future__ import print_function
+
+import logging
+from lxml import etree
+
+
+# Inspired from here: https://stackoverflow.com/a/46128043
+
+
+def sort_children(node, klass, key):
+    """ Sort children along tag and given attribute.
+    if attr is None, sort along all attributes"""
+    if not isinstance(node.tag, str):  # PYTHON 2: use basestring instead
+        # not a TAG, it is comment or DATA
+        # no need to sort
+        return
+
+
+    if node.get('class') == klass:
+        # sort child along attr
+        node[:] = sorted(node, key=key)
+    else:
+        # and recurse
+        for child in node:
+            sort_children(child, klass, key)
+
+
+def sort(unsorted_file, sorted_file, klass, key):
+    """Sort unsorted xml file and save to sorted_file"""
+    tree = etree.parse(unsorted_file)
+    root = tree.getroot()
+    sort_children(root, klass, key)
+
+    sorted_unicode = etree.tostring(root,
+                                    pretty_print=True,
+                                    encoding='unicode')
+    with open(sorted_file, 'w') as output_fp:
+        output_fp.write('%s' % sorted_unicode)
+        logging.info('written sorted file %s', sorted_unicode)
+
+
+def row_col_key(node):
+    """Return the sorting key of an xml node
+    using tag and attributes
+    """
+    row = node.get('row') if node.get('row') else -1
+    col = node.get('column') if node.get('column') else -1
+
+    return '{:04d}{:04d}'.format(int(row), int(col))
+
+
+
+import argparse
+
+
+parser = argparse.ArgumentParser(prog='sort_ui',
+                                 description="Qt UI file sorter")
+
+parser.add_argument('filename',
+                    metavar='filename',
+                    type=str,
+                    help='The path to the unsorted input file (*.ui)')
+
+parser.add_argument('-o',
+                    '--outfile',
+                    metavar='outfile',
+                    type=str,
+                    help='The path to the sorted output file')
+
+
+# Execute the parse_args() method
+args = parser.parse_args()
+
+filename = args.filename
+
+if args.outfile is None:
+    filename_out = filename
+else:
+    filename_out = args.outfile
+
+
+sort(filename, filename_out, "QGridLayout", row_col_key)
+
