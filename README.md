@@ -1,8 +1,8 @@
 # Qt UI file sorter
 
-When loading, editing and saving a Qt UI file with Qt Designer, Qt designer will not respect the order of xml items. Instead the order will change seemingly at random.
+When loading, editing and saving a Qt UI file with Qt Designer, Qt designer will not respect the order of xml items. Instead the order will change seemingly at random. This behavior is unfriendly to version control.
 
-This behavior is unfriendly to version control.
+This simple python script attempts to restore the order in order to have a clean diff when committing the changes. 
 
 Currently the tool supports:
 - Sort the children of QGridLayout by row-column order
