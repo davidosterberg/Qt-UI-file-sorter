@@ -61,7 +61,12 @@ def process(infile, outfile, sort_qgridlayout=True, remove_stdset=True, remove_n
     output_unicode = etree.tostring(root,
                                     pretty_print=True,
                                     encoding='unicode')
-    with open(outfile, 'w') as output_fp:
+    
+    with open(infile) as f:
+        f.readline()
+        newline = f.newlines
+
+    with open(outfile, 'w', newline=newline) as output_fp:
         output_fp.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         output_fp.write('%s' % output_unicode)
 
