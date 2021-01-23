@@ -77,9 +77,10 @@ import argparse
 parser = argparse.ArgumentParser(prog='sort_ui',
                                  description="Qt UI file post processor")
 
-parser.add_argument('filename',
+parser.add_argument('filenames',
                     metavar='filename',
                     type=str,
+                    nargs = '+',
                     help='The path to the unsorted input file (*.ui)')
 
 parser.add_argument('-o',
@@ -112,10 +113,15 @@ parser.set_defaults(sort_qgridlayout=True, remove_stdset=True, remove_native=Tru
 # Execute the parse_args() method
 args = parser.parse_args()
 
-if args.outfile is None:
-    filename_out = args.filename
-else:
-    filename_out = args.outfile
 
-process(args.filename, filename_out, args.sort_qgridlayout, args.remove_stdset, args.remove_native)
+if args.outfile is not None:
+    if len(args.filenames) == 1:
+        filename_out = args.filenames[1]
+        process(filename, filename_out, args.sort_qgridlayout, args.remove_stdset, args.remove_native)
+        exit(0)
+    else:
+        print("-o, --output option can only be used with a single input file")
+        exit(1)
 
+for filename in args.filenames:
+    process(filename, filename, args.sort_qgridlayout, args.remove_stdset, args.remove_native)
