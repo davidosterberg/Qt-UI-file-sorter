@@ -14,21 +14,28 @@ Problem is discussed further here:
 https://stackoverflow.com/questions/65463217/qt-ui-file-xml-order-qgridlayout-row-order-leads-to-large-commit-differences/65778726?noredirect=1#comment116324573_65778726
 
 
-Installation:
+## Installation:
 ```sh
 git clone git@github.com:davidosterberg/Qt-UI-file-sorter.git
 ```
 
-Usage:
+## Usage:
 ```sh
 sort_ui [-h] [-o outfile] [--no-sort-qgridlayout] [--no-remove-stdset] [--no-remove-native] filename
 ```
 
-Example:
+### Example 1:
 ```sh
 sort_ui examples/TaskHoleParameters.ui
 ```
 will sort the supplied unsorted ui file overwriting the original.
+
+
+### Example 2:
+To sort all ui files in a project recursively
+```sh
+find . -type f -name "*.ui" -print | xargs sort_ui --no-remove-stdset --no-remove-native
+```
 
 ## Installation/Usage on Windows
 
