@@ -61,7 +61,7 @@ def process(infile, outfile, sort_qgridlayout=True, remove_stdset=True, remove_n
     output_unicode = etree.tostring(root,
                                     pretty_print=True,
                                     encoding='unicode')
-    
+
     with open(infile) as f:
         f.readline()
         newline = f.newlines
@@ -102,6 +102,10 @@ parser.add_argument('--no-remove-native',
                     action='store_false',
                     dest='remove_native',
                     help='Do not remove any native="true" attribute (default: false)')
+
+parser.add_argument('--version',
+                    action='version',
+                    version='0.0.2')
 
 parser.set_defaults(sort_qgridlayout=True, remove_stdset=True, remove_native=True)
 
