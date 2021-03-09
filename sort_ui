@@ -81,13 +81,13 @@ parser.add_argument('filenames',
                     metavar='filename',
                     type=str,
                     nargs = '+',
-                    help='The path to the unsorted input file (*.ui)')
+                    help='The path to the unsorted input file (*.ui). If no outfile is given, the changes will be applied in-place.')
 
 parser.add_argument('-o',
                     '--outfile',
                     metavar='outfile',
                     type=str,
-                    help='The path to the sorted output file')
+                    help='The path to the sorted output file.')
 
 parser.add_argument('--no-sort-qgridlayout',
                     action='store_false',
