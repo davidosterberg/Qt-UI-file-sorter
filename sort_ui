@@ -16,10 +16,10 @@ def sort_children(node, klass, key):
     if node.get('class') == klass:
         # sort child along attr
         node[:] = sorted(node, key=key)
-    else:
-        # and recurse
-        for child in node:
-            sort_children(child, klass, key)
+
+    # and recurse
+    for child in node:
+        sort_children(child, klass, key)
 
 
 def row_col_key(node):
