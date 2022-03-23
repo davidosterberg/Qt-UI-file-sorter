@@ -58,18 +58,7 @@ def process(infile, outfile, sort_qgridlayout=True, remove_stdset=True, remove_n
     if remove_native:
         remove_attr(root, "native", "true")
 
-    output_unicode = etree.tostring(root,
-                                    pretty_print=True,
-                                    encoding='unicode')
-
-    with open(infile) as f:
-        f.readline()
-        newline = f.newlines
-
-    with open(outfile, 'w', newline=newline) as output_fp:
-        output_fp.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        output_fp.write('%s' % output_unicode)
-
+    tree.write(outfile,encoding="UTF-8",xml_declaration=True,pretty_print=True)
 
 
 import argparse
